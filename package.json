@@ -5,7 +5,9 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
-		"test": "mocha ./tests/ --ui tdd"
+		"test": "mocha ./tests/ --ui tdd",
+    "devstart": "nodemon index.js",
+    "serverstart": "DEBUG=boilerplate-project-metricimpconverter:* npm run devstart"
 	},
 	"dependencies": {
 		"body-parser": "^1.19.0",
@@ -18,7 +20,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/freeCodeCamp/boilerplate-project-metricimpconverter"
+		"url": "https://github.com/sazk07/fcc-boilerplate-project-metricimpconverter"
 	},
 	"keywords": [
 		"node",
