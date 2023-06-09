@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node server.js",
 		"test": "mocha ./tests/ --ui tdd",
-    "devstart": "nodemon index.js",
+    "devstart": "nodemon server.js",
     "serverstart": "DEBUG=boilerplate-project-metricimpconverter:* npm run devstart"
 	},
 	"dependencies": {
