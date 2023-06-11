@@ -4,13 +4,21 @@ function ConvertHandler() {
 
   this.getNum = function(input) {
     let result
+    let number1
+    let number2
     // check for / sign. if present, take the character before it, cast to number. take the character after it. cast to number. divide it and result = that calculation output
-    const regex1 = /^[\d\.\/]+/
+    const regex1 = /(^[\d\.?]+)\/?(\d+)?/
     try {
-      const numberPartOfInputArr = regex1.exec(input)
-      const numberString = numberPartOfInputArr[0]
-      const numberCastToNumber = Number(numberString)
-      result = numberCastToNumber
+      const numberPartOfInputArr = input.match(regex1)
+      const partOne = numberPartOfInputArr[1]
+      const partTwo = numberPartOfInputArr[2]
+      number1 = Number(partOne)
+      if (!partTwo) {
+        number2 = 1
+      } else {
+        number2 = Number(partTwo)
+      }
+      result = number1 / number2
     } catch (error) {
       console.error(`getNum error: ${error}`)
       result = null
@@ -20,7 +28,7 @@ function ConvertHandler() {
 
   this.getUnit = function(input) {
     let result;
-    const regex2 = /[^0-9]+/
+    const regex2 = /[a-z]+/
     try {
       const unitPartOfInputArr = regex2.exec(input)
       const unitString = unitPartOfInputArr[0]
