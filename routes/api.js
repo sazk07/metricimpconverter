@@ -3,22 +3,40 @@
 const { expect } = require('chai');
 const ConvertHandler = require('../controllers/convertHandler.js');
 
-module.exports = function (app) {
-  let convertHandler = new ConvertHandler();
+module.exports = function(app) {
+  const convertHandler = new ConvertHandler();
   app.get('/api/convert', (req, res) => {
-    const { input } = req.params
-    const initNum = convertHandler.getNum(input)
+    const { input } = req.query
+    // TODO move invalid unit check to api from controller
+    let initNum = convertHandler.getNum(input)
     const initUnit = convertHandler.getUnit(input)
+    if (initUnit === null) {
+      if (initNum < 1) {
+        res.send('invalid number and unit')
+      } else {
+        res.send('invalid unit')
+      }
+    } else {
+      if (initNum < 1 && initNum !== null) {
+        res.send('invalid number')
+      } else {
+        if (initNum === null) {
+          initNum = 1
+        }
+      }
+    }
+    const fullInitUnit = convertHandler.spellOutUnit(initUnit)
     const returnNum = convertHandler.convert(initNum, initUnit)
     const returnUnit = convertHandler.getReturnUnit(initUnit)
-    const stringOutput = convertHandler.getString(initNum, initUnit, returnNum, returnUnit)
+    const spellOutReturnUnit = convertHandler.spellOutUnit(returnUnit)
+    const stringOutput = convertHandler.getString(initNum, fullInitUnit, returnNum, spellOutReturnUnit)
     res.json({
       initNum,
-      initUnit,
+      initUnit: initUnit,
       returnNum,
       returnUnit,
       string: stringOutput
     })
-  })
 
+  })
 };

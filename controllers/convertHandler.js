@@ -1,43 +1,65 @@
+'use strict'
+
 function ConvertHandler() {
 
   this.getNum = function(input) {
     let result
-    const regex1 = /^[0-9]+/
-    const numberPartOfInput = regex1.exec(input)
-        try {
-          const numberPartOfInputCastToNumber = Number(numberPartOfInput[0])
-          if (input === 'mi' || input === 'km' || input === 'kg' || input === 'lbs' || input === 'gal' || input === 'L') {
-            numberPartOfInputCastToNumber = 1
-          }
-          if (numberPartOfInputCastToNumber < 1) {
-            result = "invalid unit and number"
-          } else {
-            numberPartOfInput === 'null' ? result = 'invalid unit' : result = numberPartOfInputCastToNumber
-          }
-        } catch(err) {
-          result = 'invalid unit'
-        }
+    // check for / sign. if present, take the character before it, cast to number. take the character after it. cast to number. divide it and result = that calculation output
+    const regex1 = /^[\d\.\/]+/
+    try {
+      const numberPartOfInputArr = regex1.exec(input)
+      const numberString = numberPartOfInputArr[0]
+      const numberCastToNumber = Number(numberString)
+      result = numberCastToNumber
+    } catch (error) {
+      console.error(`getNum error: ${error}`)
+      result = null
+    }
     return result
   };
 
   this.getUnit = function(input) {
     let result;
-    // get unit from input using regex
     const regex2 = /[^0-9]+/
-    const unitPartOfInput = regex2.exec(input)
-    const unitValue = unitPartOfInput[0]
-    console.log(unitValue)
-    if (unitValue !== 'mi' && unitValue !== 'km' && unitValue !== 'lbs' && unitValue !== 'kg' && unitValue !== 'gal' && unitValue !== 'L' && unitValue !== 'l') {
-      result = 'invalid unit'
-    } else {
-      result = unitValue
+    try {
+      const unitPartOfInputArr = regex2.exec(input)
+      const unitString = unitPartOfInputArr[0]
+      switch (unitString) {
+        case 'mi':
+          result = unitString
+          break;
+        case 'km':
+          result = unitString
+          break;
+        case 'kg':
+          result = unitString
+          break;
+        case 'lbs':
+          result = unitString
+          break;
+        case 'gal':
+          result = unitString
+          break;
+        case 'L':
+          result = unitString
+          break;
+        case 'l':
+          result = unitString
+          break;
+        default:
+          result = null
+          break;
+      }
+    } catch (error) {
+      console.error(`getUnit error: ${error}`)
+      result = null
     }
     return result
   };
 
   this.getReturnUnit = function(initUnit) {
     let result;
-    // cases: km to mi. kg to lbs. gal to L.
+    // cases: km to mi. kg to lbs. gal to L. gal to l
     switch (initUnit) {
       case 'mi':
         result = 'km'
@@ -59,6 +81,7 @@ function ConvertHandler() {
         break;
       case 'l':
         result = 'gal'
+        break;
       default:
         result = "invalid unit"
         break;
@@ -87,6 +110,9 @@ function ConvertHandler() {
       case 'L':
         result = 'litres'
         break;
+      case 'l':
+        result = 'litres'
+        break;
       default:
         result = 'invalid unit'
         break;
@@ -98,28 +124,36 @@ function ConvertHandler() {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
+    let exactResult
     let result;
     switch (initUnit) {
       case 'km':
-        result = initNum / miToKm
+        exactResult = initNum / miToKm
+        result = Math.round((exactResult + Number.EPSILON) * 100000) / 100000
         break;
       case 'mi':
-        result = initNum * miToKm
+        exactResult = initNum * miToKm
+        result = Math.round((exactResult + Number.EPSILON) * 100000) / 100000
         break;
       case 'gal':
-        result = initNum * galToL
+        exactResult = initNum * galToL
+        result = Math.round((exactResult + Number.EPSILON) * 100000) / 100000
         break;
       case 'L':
-        result = initNum / galToL
+        exactResult = initNum / galToL
+        result = Math.round((exactResult + Number.EPSILON) * 100000) / 100000
         break;
       case 'l':
-        result = initNum / galToL
+        exactResult = initNum / galToL
+        result = Math.round((exactResult + Number.EPSILON) * 100000) / 100000
         break;
       case 'lbs':
-        result = initNum * lbsToKg
+        exactResult = initNum * lbsToKg
+        result = Math.round((exactResult + Number.EPSILON) * 100000) / 100000
         break;
       case 'kg':
-        result = initNum / lbsToKg
+        exactResult = initNum / lbsToKg
+        result = Math.round((exactResult + Number.EPSILON) * 100000) / 100000
         break;
       default:
         break;
