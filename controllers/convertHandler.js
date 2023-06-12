@@ -11,19 +11,20 @@ function ConvertHandler() {
       const checkForMoreThanOneSlash = input.split('/')
       if (checkForMoreThanOneSlash.length > 2) {
         throw new Error("Cannot have more than one slash")
-      }
-      const numberPartOfInputArr = input.match(regex1)
-      const partOne = numberPartOfInputArr[1]
-      const partTwo = numberPartOfInputArr[2]
-      number1 = Number(partOne)
-      if (!partTwo) {
-        number2 = 1
       } else {
-        number2 = Number(partTwo)
-      }
-      result = number1 / number2
-      if (!isFinite(result)) {
-        throw new Error("Attempted divide by zero")
+        const numberPartOfInputArr = input.match(regex1)
+        const partOne = numberPartOfInputArr[1]
+        const partTwo = numberPartOfInputArr[2]
+        number1 = Number(partOne)
+        if (!partTwo) {
+          number2 = 1
+        } else {
+          number2 = Number(partTwo)
+        }
+        result = number1 / number2
+        if (!isFinite(result)) {
+          throw new Error("Attempted divide by zero")
+        }
       }
     } catch (error) {
       console.error(`getNum error: ${error}`)

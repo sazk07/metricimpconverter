@@ -1,7 +1,6 @@
 'use strict';
 
 const express     = require('express');
-const { expect }      = require('chai');
 const cors        = require('cors');
 require('dotenv').config();
 

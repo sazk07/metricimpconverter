@@ -45,19 +45,19 @@ suite('Unit Tests', function(){
     test('Double fraction input', function (done) {
       let input = '3/2/3lbs'
       assert.isNull(convertHandler.getNum(input), "Double fraction should return null")
-      input = '1//3km'
+      input = "1//3km"
       assert.isNull(convertHandler.getNum(input), "Double divide sign should return null")
       done()
     })
     test('No numerical input', function (done) {
       let input = 'mi'
-      assert.equal(convertHandler.getNum(input), 1)
+      assert.isNull(convertHandler.getNum(input))
       input = 'lbs'
-      assert.equal(convertHandler.getNum(input), 1)
+      assert.isNull(convertHandler.getNum(input))
       input = 'l'
-      assert.equal(convertHandler.getNum(input), 1)
+      assert.isNull(convertHandler.getNum(input))
       input = 'L'
-      assert.equal(convertHandler.getNum(input), 1)
+      assert.isNull(convertHandler.getNum(input))
       done()
     })
   })
@@ -65,9 +65,9 @@ suite('Unit Tests', function(){
     test('Correct input unit', function (done) {
       let input = ['mi', 'km', 'kg', 'lbs', 'l', 'GAL', 'MI', 'KM', 'KG', 'LBS', 'L']
       let output = ['mi', 'km', 'kg', 'lbs', 'l', 'gal', 'mi', 'km', 'kg', 'lbs', 'l']
-      input.forEach((element, idx) => {
-        assert.equal(convertHandler.getUnit(element), output[idx])
-      })
+      for (let idx=0; idx< input.length; idx++) {
+        assert.equal(convertHandler.getUnit(input[idx]), output[idx])
+      }
       done()
     })
     test('Invalid input unit test', function (done) {

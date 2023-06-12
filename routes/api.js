@@ -1,6 +1,5 @@
 'use strict';
 
-const { expect } = require('chai');
 const ConvertHandler = require('../controllers/convertHandler.js');
 
 module.exports = function(app) {
