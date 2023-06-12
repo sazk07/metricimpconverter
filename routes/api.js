@@ -7,7 +7,6 @@ module.exports = function(app) {
   const convertHandler = new ConvertHandler();
   app.get('/api/convert', (req, res) => {
     const { input } = req.query
-    // TODO move invalid unit check to api from controller
     let initNum = convertHandler.getNum(input)
     const initUnit = convertHandler.getUnit(input)
     if (initUnit === null) {
@@ -37,6 +36,5 @@ module.exports = function(app) {
       returnUnit,
       string: stringOutput
     })
-
   })
 };

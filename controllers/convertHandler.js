@@ -6,10 +6,10 @@ function ConvertHandler() {
     let result
     let number1
     let number2
-    // check for / sign. if present, take the character before it, cast to number. take the character after it. cast to number. divide it and result = that calculation output
-    const regex1 = /(^[\d\.?]+)\/?(\d+)?/
+    const regex1 = /(^[\d\.?]+)(?<!\/)?([\d\.?]+)?/
     try {
       const numberPartOfInputArr = input.match(regex1)
+      console.log(numberPartOfInputArr)
       const partOne = numberPartOfInputArr[1]
       const partTwo = numberPartOfInputArr[2]
       number1 = Number(partOne)
@@ -19,6 +19,9 @@ function ConvertHandler() {
         number2 = Number(partTwo)
       }
       result = number1 / number2
+      if (!isFinite(result)) {
+        throw new Error("Attempted divide by zero")
+      }
     } catch (error) {
       console.error(`getNum error: ${error}`)
       result = null
