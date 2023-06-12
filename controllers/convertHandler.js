@@ -89,7 +89,6 @@ function ConvertHandler() {
 
   this.getReturnUnit = function(initUnit) {
     let result;
-    // cases: km to mi. kg to lbs. gal to L. gal to l
     switch (initUnit) {
       case 'mi':
         result = 'km'
