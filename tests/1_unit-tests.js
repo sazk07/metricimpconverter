@@ -1,5 +1,5 @@
 const chai = require('chai');
-let assert = chai.assert;
+const assert = chai.assert;
 const ConvertHandler = require('../controllers/convertHandler.js');
 
 let convertHandler = new ConvertHandler();
@@ -45,6 +45,36 @@ suite('Unit Tests', function(){
     test('Double fraction input', function (done) {
       let input = '3/2/3lbs'
       assert.isNull(convertHandler.getNum(input), "Double fraction should return null")
+      input = '1//3km'
+      assert.isNull(convertHandler.getNum(input), "Double divide sign should return null")
+      done()
+    })
+    test('No numerical input', function (done) {
+      let input = 'mi'
+      assert.equal(convertHandler.getNum(input), 1)
+      input = 'lbs'
+      assert.equal(convertHandler.getNum(input), 1)
+      input = 'l'
+      assert.equal(convertHandler.getNum(input), 1)
+      input = 'L'
+      assert.equal(convertHandler.getNum(input), 1)
+      done()
+    })
+  })
+  suite('Function convertHandler.getUnit(input)', function() {
+    test('Correct input unit', function (done) {
+      let input = ['mi', 'km', 'kg', 'lbs', 'l', 'GAL', 'MI', 'KM', 'KG', 'LBS', 'L']
+      let output = ['mi', 'km', 'kg', 'lbs', 'l', 'gal', 'mi', 'km', 'kg', 'lbs', 'l']
+      input.forEach((element, idx) => {
+        assert.equal(convertHandler.getUnit(element), output[idx])
+      })
+      done()
+    })
+    test('Invalid input unit test', function (done) {
+      let input = '123kgm'
+      assert.isNull(convertHandler.getUnit(input))
+      input = '12what'
+      assert.isNull(convertHandler.getUnit(input))
       done()
     })
   })

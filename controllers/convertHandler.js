@@ -6,10 +6,13 @@ function ConvertHandler() {
     let result
     let number1
     let number2
-    const regex1 = /(^[\d\.?]+)(?<!\/)?([\d\.?]+)?/
+    const regex1 = /(^[\d\.?]+)\/?([\d\.?]+)?/
     try {
+      const checkForMoreThanOneSlash = input.split('/')
+      if (checkForMoreThanOneSlash.length > 2) {
+        throw new Error("Cannot have more than one slash")
+      }
       const numberPartOfInputArr = input.match(regex1)
-      console.log(numberPartOfInputArr)
       const partOne = numberPartOfInputArr[1]
       const partTwo = numberPartOfInputArr[2]
       number1 = Number(partOne)
@@ -31,7 +34,7 @@ function ConvertHandler() {
 
   this.getUnit = function(input) {
     let result;
-    const regex2 = /[a-z]+/
+    const regex2 = /[a-zA-Z]+/
     try {
       const unitPartOfInputArr = regex2.exec(input)
       const unitString = unitPartOfInputArr[0]
@@ -51,11 +54,26 @@ function ConvertHandler() {
         case 'gal':
           result = unitString
           break;
-        case 'L':
-          result = unitString
-          break;
         case 'l':
           result = unitString
+          break;
+        case 'MI':
+          result = unitString.toLowerCase()
+          break;
+        case 'KM':
+          result = unitString.toLowerCase()
+          break;
+        case 'KG':
+          result = unitString.toLowerCase()
+          break;
+        case 'LBS':
+          result = unitString.toLowerCase()
+          break;
+        case 'GAL':
+          result = unitString.toLowerCase()
+          break;
+        case 'L':
+          result = unitString.toLowerCase()
           break;
         default:
           result = null
