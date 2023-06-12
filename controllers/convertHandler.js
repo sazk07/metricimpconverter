@@ -10,7 +10,7 @@ function ConvertHandler() {
     try {
       const checkForMoreThanOneSlash = input.split('/')
       if (checkForMoreThanOneSlash.length > 2) {
-        throw new Error("Cannot have more than one slash")
+        result = 'invalid number'
       } else {
         const numberPartOfInputArr = input.match(regex1)
         const partOne = numberPartOfInputArr[1]
@@ -27,7 +27,7 @@ function ConvertHandler() {
         }
       }
     } catch (error) {
-      console.error(`getNum error: ${error}`)
+      console.error(`getNum error: ${error.name}: ${error.message}`)
       result = null
     }
     return result
@@ -74,7 +74,7 @@ function ConvertHandler() {
           result = unitString.toLowerCase()
           break;
         case 'L':
-          result = unitString.toLowerCase()
+          result = unitString
           break;
         default:
           result = null

@@ -9,7 +9,9 @@ module.exports = function(app) {
     let initNum = convertHandler.getNum(input)
     const initUnit = convertHandler.getUnit(input)
     if (initUnit === null) {
-      if (initNum <= 0) {
+      if (isNaN(initNum)) {
+        res.send('invalid number and unit')
+      } else if (initNum <= 0) {
         res.send('invalid number and unit')
       } else {
         res.send('invalid unit')
@@ -17,9 +19,13 @@ module.exports = function(app) {
     } else {
       if (initNum <= 0 && initNum !== null) {
         res.send('invalid number')
+      } else if (initNum > 0 && initNum !== null) {
+        initNum = initNum
       } else {
         if (initNum === null) {
           initNum = 1
+        } else {
+          res.send('invalid number')
         }
       }
     }
