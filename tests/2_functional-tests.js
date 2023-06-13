@@ -6,7 +6,9 @@ let { assert } = chai
 const server = require('../server');
 
 chai.use(chaiHttp);
-
+after(function() {
+  chai.request(server).get('/api')
+})
 suite('Functional Tests', function() {
   suite('Routing Tests', function () {
     suite('GET /api/convert => conversion object', function () {
