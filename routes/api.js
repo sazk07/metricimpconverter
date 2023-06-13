@@ -29,11 +29,11 @@ module.exports = function(app) {
         }
       }
     }
-    const fullInitUnit = convertHandler.spellOutUnit(initUnit)
+    const initUnitString = convertHandler.spellOutUnit(initUnit)
     const returnNum = convertHandler.convert(initNum, initUnit)
     const returnUnit = convertHandler.getReturnUnit(initUnit)
-    const spellOutReturnUnit = convertHandler.spellOutUnit(returnUnit)
-    const stringOutput = convertHandler.getString(initNum, fullInitUnit, returnNum, spellOutReturnUnit)
+    const returnUnitString = convertHandler.spellOutUnit(returnUnit)
+    const stringOutput = convertHandler.getString(initNum, initUnitString, returnNum, returnUnitString)
     res.json({
       initNum,
       initUnit: initUnit,

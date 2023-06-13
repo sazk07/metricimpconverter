@@ -56,7 +56,7 @@ function ConvertHandler() {
           result = unitString
           break;
         case 'l':
-          result = unitString
+          result = unitString.toUpperCase()
           break;
         case 'MI':
           result = unitString.toLowerCase()
@@ -90,6 +90,21 @@ function ConvertHandler() {
   this.getReturnUnit = function(initUnit) {
     let result;
     switch (initUnit) {
+      case 'MI':
+        result = 'km'
+        break;
+      case 'KM':
+        result = 'mi'
+        break;
+      case 'KG':
+        result = 'lbs'
+        break;
+      case 'LBS':
+        result = 'kg'
+        break;
+      case 'GAL':
+        result = 'L'
+        break;
       case 'mi':
         result = 'km'
         break;
@@ -128,7 +143,7 @@ function ConvertHandler() {
         result = "miles"
         break;
       case 'km':
-        result = "kilometres"
+        result = "kilometers"
         break;
       case 'lbs':
         result = 'pounds'
@@ -190,9 +205,9 @@ function ConvertHandler() {
     return result;
   };
 
-  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
+  this.getString = function(initNum, initUnitString, returnNum, returnUnitString) {
     let result;
-    result = `${initNum} ${initUnit} converts to ${returnNum} ${returnUnit}`
+    result = `${initNum} ${initUnitString} converts to ${returnNum} ${returnUnitString}`
     return result;
   };
 

@@ -66,7 +66,7 @@ suite('Unit Tests', function(){
   suite('Function convertHandler.getUnit(input)', function() {
     test('Correct input unit', function (done) {
       let input = ['mi', 'km', 'kg', 'lbs', 'l', 'gal', 'GAL', 'MI', 'KM', 'KG', 'LBS', 'L']
-      let output = ['mi', 'km', 'kg', 'lbs', 'l', 'gal', 'gal', 'mi', 'km', 'kg', 'lbs', 'L']
+      let output = ['mi', 'km', 'kg', 'lbs', 'L', 'gal', 'gal', 'mi', 'km', 'kg', 'lbs', 'L']
       for (let idx=0; idx< input.length; idx++) {
         assert.equal(convertHandler.getUnit(input[idx]), output[idx])
       }
@@ -95,7 +95,7 @@ suite('Unit Tests', function(){
   suite('Function convertHandler.spellOutUnit(input)', function () {
     test("Correct spellOut unit", function (done) {
       let input = ['mi', 'km', 'kg', 'lbs', 'l', 'gal']
-      let output = ['miles', 'kilometres', 'kilograms', 'pounds', 'litres', 'gallons']
+      let output = ['miles', 'kilometers', 'kilograms', 'pounds', 'litres', 'gallons']
       for (let idx=0; idx<input.length; idx++) {
         assert.equal(convertHandler.spellOutUnit(input[idx]), output[idx])
       }
