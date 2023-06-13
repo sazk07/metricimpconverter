@@ -47,7 +47,7 @@ suite('Unit Tests', function(){
     test('Double fraction input', function (done) {
       let input = '3/2/3lbs'
       assert.equal(convertHandler.getNum(input), "invalid number")
-      input = '1//3km'
+      input = "1//3km"
       assert.equal(convertHandler.getNum(input), "invalid number")
       done()
     })
